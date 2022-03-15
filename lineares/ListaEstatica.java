@@ -1,6 +1,6 @@
 package lineares;
 
-public class ListaEstatica {
+public class ListaEstatica implements Lista {
 	private int[] info;
 	private int tamanho;
 
@@ -9,6 +9,7 @@ public class ListaEstatica {
 		tamanho = 0;
 	}
 
+	@Override
 	public void inserir(int valor) {
 		if (tamanho == info.length) {
 			this.redimensionar();
@@ -25,6 +26,7 @@ public class ListaEstatica {
 		info = novo;
 	}
 
+	@Override
 	public String exibir() {
 		String retorno = "[";
 		for (int i = 0; i < tamanho; i++) {
@@ -33,6 +35,7 @@ public class ListaEstatica {
 		return retorno + "]";
 	}
 
+	@Override
 	public int buscar(int valor) {
 		for (int i = 0; i < tamanho; i++) {
 			if (info[i] == valor) {
@@ -42,6 +45,7 @@ public class ListaEstatica {
 		return -1;
 	}
 
+	@Override
 	public void retirar(int valor) {
 		int posicao = buscar(valor);
 		if (posicao != -1) {
@@ -52,8 +56,9 @@ public class ListaEstatica {
 		}
 	}
 
-	public ListaEstatica copiar() {
-		ListaEstatica novaLista = new ListaEstatica();
+	@Override
+	public Lista copiar() {
+		Lista novaLista = new ListaEstatica();
 
 		for (int i = 0; i < this.tamanho; i++) {
 			novaLista.inserir(this.info[i]);
@@ -62,23 +67,27 @@ public class ListaEstatica {
 		return novaLista;
 	}
 
-	public void concatenar(ListaEstatica outra) {
+	@Override
+	public void concatenar(Lista outra) {
 		for (int i = 0; i < outra.getTamanho(); i++) {
-			inserir(outra.info[i]);
+			inserir(outra.pegar(i));
 		}
 	}
 
+	@Override
 	public int getTamanho() {
 		return this.tamanho;
 	}
 
+	@Override
 	public boolean estaVazia() {
 		return (tamanho == 0);
 	}
 
-	public ListaEstatica dividir() {
+	@Override
+	public Lista dividir() {
 		int metade = tamanho / 2;
-		ListaEstatica novaLista = new ListaEstatica();
+		Lista novaLista = new ListaEstatica();
 
 		for (int i = metade; i < tamanho; i++) {
 			novaLista.inserir(this.info[i]);
@@ -86,5 +95,10 @@ public class ListaEstatica {
 		tamanho = metade;
 
 		return novaLista;
+	}
+
+	@Override
+	public int pegar(int posicao) {
+		return info[posicao];
 	}
 }
