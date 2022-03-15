@@ -24,7 +24,7 @@ public class TesteListaEstatica {
 		ListaEstatica novaLista;
 		novaLista = lista.dividir();
 		System.out.println("Primeira lista (original pela metade) = "+lista.exibir());
-		System.out.println("Lista criada pela divis√£o = "+novaLista.exibir());
+		System.out.println("Lista criada pela divis„o = "+novaLista.exibir());
 
 		novaLista.inserir(100);
 		System.out.println("Lista A = "+novaLista.exibir());
@@ -39,6 +39,7 @@ public class TesteListaEstatica {
 		terceira.retirar(200);
 		System.out.println("Lista original (sem 100) = "+novaLista.exibir());
 		System.out.println("Lista copiada (sem 200) = "+terceira.exibir());
+		
 	}
 
 
