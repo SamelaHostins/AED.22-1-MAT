@@ -18,7 +18,7 @@ public class TesteListaDinamica {
 			System.out.println("Pegar pela posi��o 2 = "+lista.pegar(2));
 			lista.retirar(100);
 			lista.retirar(50);
-			System.out.println("Lista ap�s retiradas = "+lista.exibir());
+			System.out.println("Lista ap�s retiradas (100 e 50) = "+lista.exibir());
 			System.out.println("Tamanho = "+lista.getTamanho());
 			System.out.println("Buscar 50 = "+lista.buscar(50));
 			System.out.println("Buscar 91 = "+lista.buscar(91));
@@ -39,12 +39,16 @@ public class TesteListaDinamica {
 			lista1.inserir(91);
 			lista1.inserir(57);
 			lista1.inserir(25);
+			System.out.println("=====\nOutras listas");
 			System.out.println("Lista 1 = "+lista1.exibir());
+			Lista lista3 = lista1.copiar();
+			System.out.println("Lista copiada = "+lista3.exibir());
 			Lista lista2 = lista1.dividir();
 			System.out.println("Lista 1 = "+lista1.exibir());
 			System.out.println("Lista 1 tam = "+lista1.getTamanho());
 			System.out.println("Lista 2 = "+lista2.exibir());
 			System.out.println("Lista 2 tam = "+lista2.getTamanho());
+			System.out.println("Lista copiada = "+lista3.exibir());
 	}
 
 }

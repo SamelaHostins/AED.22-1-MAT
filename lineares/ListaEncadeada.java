@@ -24,21 +24,21 @@ public class ListaEncadeada implements Lista {
 	public String exibir() {
 		NoLista p = primeiro;
 		String resultado = "[";
-		
+
 		while (p != null) {
-			resultado += p.getInfo()+", ";
+			resultado += p.getInfo() + ", ";
 			p = p.getProximo();
 		}
-		
-		return resultado+"]";
+
+		return resultado + "]";
 	}
 
 	@Override
 	public int buscar(int valor) {
 		int posicao = 0;
 		NoLista p = primeiro;
-		
-		while (p != null) {		
+
+		while (p != null) {
 			if (p.getInfo() == valor) {
 				return posicao;
 			}
@@ -52,17 +52,16 @@ public class ListaEncadeada implements Lista {
 	public void retirar(int valor) {
 		NoLista anterior = null;
 		NoLista p = primeiro;
-		
-		while(p != null && p.getInfo() != valor) {
+
+		while (p != null && p.getInfo() != valor) {
 			anterior = p;
 			p = p.getProximo();
 		}
-		
-		if (p != null) {  // significa que encontrou o elemento a ser retirado
-			if(anterior == null) {
+
+		if (p != null) { // significa que encontrou o elemento a ser retirado
+			if (anterior == null) {
 				primeiro = p.getProximo();
-			}
-			else {
+			} else {
 				anterior.setProximo(p.getProximo());
 			}
 			qtdElem--;
@@ -75,20 +74,27 @@ public class ListaEncadeada implements Lista {
 
 	@Override
 	public Lista copiar() {
-		// TODO Auto-generated method stub
-		return null;
+		ListaEncadeada novaLista = new ListaEncadeada();
+		NoLista no = primeiro;
+
+		while (no != null) {
+			novaLista.inserir(no.getInfo());
+			no = no.getProximo();
+		}
+
+		return novaLista;
 	}
 
 	@Override
-	public void concatenar(Lista outra) {
-		// TODO Auto-generated method stub
-
+	public void concatenar(Lista outra) { // contribuição do Adrian
+		for (int i = 0; i < outra.getTamanho(); i++) {
+			this.inserir(outra.pegar(i));
+		}
 	}
 
 	@Override
 	public int getTamanho() {
-		// TODO Auto-generated method stub
-		return 0;
+		return qtdElem;
 	}
 
 	@Override
@@ -97,15 +103,58 @@ public class ListaEncadeada implements Lista {
 	}
 
 	@Override
-	public Lista dividir() {
-		// TODO Auto-generated method stub
-		return null;
+	 public Lista dividir() {  // Contribuição do Vinícius
+        NoLista no = primeiro;
+        ListaEncadeada listaNova = new ListaEncadeada();
+        int metade = this.getTamanho() / 2;
+        int contador = 1;
+        NoLista novoUltimo = null;
+       
+        while(no != null) {
+            if(contador > metade) {
+                listaNova.inserir(no.getInfo());
+            }
+            else {
+            	novoUltimo = no;
+            }
+            contador++;
+            no = no.getProximo();
+        }
+        ultimo = novoUltimo;
+        ultimo.setProximo(null);
+        qtdElem = metade;
+        return listaNova;
+    }
+	
+	@Override
+	public int pegar(int pos) { // Contribuição do Vinícius
+		if (pos < 0 || pos >= this.qtdElem) {
+			throw new IndexOutOfBoundsException("Posicao=" + pos + "; Tamanho=" + qtdElem);
+		}
+		NoLista no = primeiro;
+
+		for (int i = 0; i < pos; i++) {
+			no = no.getProximo();
+		}
+
+		return no.getInfo();
 	}
 
-	@Override
-	public int pegar(int posicao) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int pegar2(int posicao) { // contribuição do Rodrigo
+		if (posicao < 0 || posicao >= this.qtdElem) {
+			throw new IndexOutOfBoundsException("Posicao=" + posicao + "; Tamanho=" + qtdElem);
+		}
+
+		NoLista p = primeiro;
+		int pos = 0;
+		while (p != null) {
+			if (pos == posicao) {
+				return p.getInfo();
+			}
+			pos++;
+			p = p.getProximo();
+		}
+		return -1; // nunca deveria chegar aqui
 	}
 
 }
