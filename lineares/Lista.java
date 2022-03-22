@@ -1,15 +1,15 @@
 package lineares;
 
-public interface Lista {
+public interface Lista<T> {
 
-	void inserir(int valor);
+	void inserir(T valor);
 	String exibir();
-	int buscar(int valor);
-	void retirar(int valor);
-	Lista copiar();
-	void concatenar(Lista outra);
+	int buscar(T valor);
+	void retirar(T valor);
+	Lista<T> copiar();
+	void concatenar(Lista<T> outra);
 	int getTamanho();
 	boolean estaVazia();
-	Lista dividir();
-	int pegar(int posicao);
+	Lista<T> dividir();
+	T pegar(int posicao);
 }
