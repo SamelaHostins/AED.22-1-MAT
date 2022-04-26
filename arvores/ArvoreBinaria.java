@@ -1,37 +1,11 @@
 package arvores;
 
-public class ArvoreBinaria<T> { // colaboração de Adrian
-	private NoArvoreBinaria<T> raiz;
+public class ArvoreBinaria<T> extends ArvoreBinariaAbstract<T> {
 
-	public ArvoreBinaria() {
-		super();
-	}
-
-	public ArvoreBinaria(NoArvoreBinaria<T> no) {
-		this.raiz = no;
-	}
-
+	@Override
 	public void setRaiz(NoArvoreBinaria<T> no) {
-		this.raiz = no;
+		super.setRaiz(no);
 	}
 
-	public boolean vazia() {
-		return this.raiz == null;
-	}
-
-	public NoArvoreBinaria<T> pertence(T info) {
-		if (this.vazia()) {
-			return null;
-		} else {
-			return raiz.pertence(info);
-		}
-	}
-
-	public String toString() {
-		if (this.vazia()) {
-			return "<>";
-		} else {
-			return this.raiz.imprimePre();
-		}
-	}
+	
 }
