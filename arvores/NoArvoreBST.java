@@ -51,10 +51,30 @@ public class NoArvoreBST<T extends Comparable<T>> extends NoArvoreBinaria<T> {
 	}
 
 	public NoArvoreBST<T> getNoSucessor() {
-		NoArvoreBST<T> sucessor = (NoArvoreBST<T>)this.getDir();
-		while( sucessor.getEsq() != null) {
-			sucessor = (NoArvoreBST<T>)sucessor.getEsq();
+		NoArvoreBST<T> sucessor = (NoArvoreBST<T>) this.getDir();
+		while (sucessor.getEsq() != null) {
+			sucessor = (NoArvoreBST<T>) sucessor.getEsq();
 		}
 		return sucessor;
+	}
+
+	public NoArvoreBST<T> getNoAntecessor() {
+		NoArvoreBST<T> sucessor = (NoArvoreBST<T>) this.getEsq();
+		while (sucessor.getDir() != null) {
+			sucessor = (NoArvoreBST<T>) sucessor.getDir();
+		}
+		return sucessor;
+	}
+	
+	public String imprimeEmOrdem() {
+		String msg = "";
+		if (this.getEsq() != null) {
+			msg += ((NoArvoreBST<T>)this.getEsq()).imprimeEmOrdem();
+		}
+		msg += this.getInfo()+", ";
+		if (this.getDir() != null) {
+			msg += ((NoArvoreBST<T>)this.getDir()).imprimeEmOrdem();
+		} 
+		return msg;
 	}
 }
