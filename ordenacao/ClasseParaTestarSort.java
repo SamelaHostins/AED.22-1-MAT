@@ -4,65 +4,69 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Random;
 
-
 class ClasseParaTestarSort {
 
 	private static Veiculo[] vetor;
 	private static Integer[] vetorInts;
 	private static String[] vetorStrings;
-	private static int[] tamanhos = {10, 500};
-	
+	private static int[] tamanhos = { 10, 500 };
+	private static Sort[] algoritmos = { new Selection<>(), new BubbleSort<>() };
+
 	public static void main(String[] args) {
 		initializeClass();
-		
-		// a linha abaixo precisa ser alterada para a classe criada pela equipe
-		Sort<Veiculo> meuAlgoritmo = new BubbleSort<>();
-
 		long ultimoNanoTime, tempoExecucao;
-		for (Integer i : tamanhos) {
-			Veiculo[] vetorCopiado = Arrays.copyOf(vetor, i);
-			System.out.println("Vetor com " + i + " veículos");
-			System.out.println(Arrays.toString(vetorCopiado));
-			ultimoNanoTime = System.nanoTime();
-			meuAlgoritmo.sort(vetorCopiado);
-			tempoExecucao = System.nanoTime() - ultimoNanoTime;
-			System.out.println("Vetor ORDENADO com " + i + " veículos em "+tempoExecucao+" ns");
-			System.out.println(Arrays.toString(vetorCopiado));
+
+		for (Sort<Veiculo> meuAlgoritmo : algoritmos) {
+			System.out.println("\n+-+-+-+ " + meuAlgoritmo.getClass().getName());
+
+			for (Integer i : tamanhos) {
+				Veiculo[] vetorCopiado = Arrays.copyOf(vetor, i);
+				System.out.println("Vetor com " + i + " veÃ­culos");
+				// System.out.println(Arrays.toString(vetorCopiado));
+				ultimoNanoTime = System.nanoTime();
+				meuAlgoritmo.sort(vetorCopiado);
+				tempoExecucao = System.nanoTime() - ultimoNanoTime;
+				System.out.println("Vetor ORDENADO com " + i + " veÃ­culos em " + tempoExecucao + " ns");
+				System.out.println(Arrays.toString(vetorCopiado));
+			}
+
 		}
 
-		// a linha abaixo precisa ser alterada para a classe criada pela equipe
-		Sort<Integer> meuAlgoritmo2 = new BubbleSort<>();
+		for (Sort<Integer> meuAlgoritmo2 : algoritmos) {
+			System.out.println("\n+-+-+-+ " + meuAlgoritmo2.getClass().getName());
 
-		for (Integer i : tamanhos) {
-			Integer[] vetorCopiado = Arrays.copyOf(vetorInts, i);
-			System.out.println("Vetor com " + i + " inteiros");
-			System.out.println(Arrays.toString(vetorCopiado));
-			ultimoNanoTime = System.nanoTime();
-			meuAlgoritmo2.sort(vetorCopiado);
-			tempoExecucao = System.nanoTime() - ultimoNanoTime;
-			System.out.println("Vetor ORDENADO com " + i + " inteiros em "+tempoExecucao+" ns");
-			System.out.println(Arrays.toString(vetorCopiado));
+			for (Integer i : tamanhos) {
+				Integer[] vetorCopiado = Arrays.copyOf(vetorInts, i);
+				System.out.println("Vetor com " + i + " inteiros");
+				//System.out.println(Arrays.toString(vetorCopiado));
+				ultimoNanoTime = System.nanoTime();
+				meuAlgoritmo2.sort(vetorCopiado);
+				tempoExecucao = System.nanoTime() - ultimoNanoTime;
+				System.out.println("Vetor ORDENADO com " + i + " inteiros em " + tempoExecucao + " ns");
+				System.out.println(Arrays.toString(vetorCopiado));
+			}
 		}
-		
-		// a linha abaixo precisa ser alterada para a classe criada pela equipe
-		Sort<String> meuAlgoritmo3 = new BubbleSort<>();
 
-		for (Integer i : tamanhos) {
-			String[] vetorCopiado = Arrays.copyOf(vetorStrings, i);
-			System.out.println("Vetor com " + i + " Strings");
-			System.out.println(Arrays.toString(vetorCopiado));
-			ultimoNanoTime = System.nanoTime();
-			meuAlgoritmo3.sort(vetorCopiado);
-			tempoExecucao = System.nanoTime() - ultimoNanoTime;
-			System.out.println("Vetor ORDENADO com " + i + " Strings em "+tempoExecucao+" ns");
-			System.out.println(Arrays.toString(vetorCopiado));
+		for (Sort<String> meuAlgoritmo3 : algoritmos) {
+			System.out.println("\n+-+-+-+ " + meuAlgoritmo3.getClass().getName());
+
+			for (Integer i : tamanhos) {
+				String[] vetorCopiado = Arrays.copyOf(vetorStrings, i);
+				System.out.println("Vetor com " + i + " Strings");
+				//System.out.println(Arrays.toString(vetorCopiado));
+				ultimoNanoTime = System.nanoTime();
+				meuAlgoritmo3.sort(vetorCopiado);
+				tempoExecucao = System.nanoTime() - ultimoNanoTime;
+				System.out.println("Vetor ORDENADO com " + i + " Strings em " + tempoExecucao + " ns");
+				System.out.println(Arrays.toString(vetorCopiado));
+			}
 		}
 	}
 
 	public static void initializeClass() {
-		vetor = new Veiculo[tamanhos[tamanhos.length-1]];
+		vetor = new Veiculo[tamanhos[tamanhos.length - 1]];
 		Veiculo veic;
-		// geração dos dados
+		// geraÃ§Ã£o dos dados
 		String nome, placa, modelo;
 		int ano;
 
@@ -77,14 +81,13 @@ class ClasseParaTestarSort {
 		Random r = new Random();
 		vetorInts = new Integer[vetor.length];
 		for (int i = 0; i < vetorInts.length; i++) {
-			vetorInts[i] = r.nextInt(vetorInts.length*1000);
+			vetorInts[i] = r.nextInt(vetorInts.length * 1000);
 		}
-		
+
 		vetorStrings = new String[vetor.length];
 		for (int i = 0; i < vetorStrings.length; i++) {
-			vetorStrings[i] = GeradorAleatorio.geraNome()+" "
-								+GeradorAleatorio.geraModelo()+" "
-								+GeradorAleatorio.geraNome();
+			vetorStrings[i] = GeradorAleatorio.geraNome() + " " + GeradorAleatorio.geraModelo() + " "
+					+ GeradorAleatorio.geraNome();
 		}
 	}
 }
@@ -92,7 +95,7 @@ class ClasseParaTestarSort {
 class GeradorAleatorio {
 
 	private static Random geraNumero = new Random();
-	private static String[] nomes = { "José", "Maria", "Pedro", "João", "Mario", "Paulo", "Paula", "Sandra", "André",
+	private static String[] nomes = { "Jose", "Maria", "Pedro", "Joao", "Mario", "Paulo", "Paula", "Sandra", "Andre",
 			"Carla" };
 	private static String[] modelos = { "Gol", "Mobi", "Fox", "Fusca", "C3", "Captur", "i30", "Fiesta", "Fit",
 			"Picanto" };
